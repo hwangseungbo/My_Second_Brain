@@ -1,0 +1,10 @@
+# Claude Code / OMC state
+.claude/
+.omc/
+
+# Obsidian
+.obsidian/workspace.json
+.obsidian/graph.json
+
+# Extracted text (generated from PDFs)
+raw/*.txt
