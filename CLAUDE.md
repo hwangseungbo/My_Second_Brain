@@ -52,11 +52,25 @@ tags: [tag1, tag2]
 
 ## Operations
 
+### 0. PRE-INGEST CHECK — Identifying new sources
+
+Before ingesting, always check what's already been processed:
+
+1. **List** all files in `raw/` (excluding `assets/` and `*.txt`)
+2. **List** all files in `wiki/sources/`
+3. **Compare**: a raw file is "new" if no corresponding page exists in `wiki/sources/`
+   - Matching rule: `raw/Doc_to_LoRA.pdf` → `wiki/sources/doc-to-lora.md`
+4. **Report** to the user: "N개 새 소스 발견: [파일명]. M개는 이미 수집됨."
+5. **Proceed** with only the new sources
+
+This check runs automatically whenever the user says "수집해줘" or "ingest" without specifying a file.
+
 ### 1. INGEST — Processing a new source
 
 When the user adds a source to `raw/` and asks you to ingest it:
 
-1. **Read** the source completely
+1. **Run PRE-INGEST CHECK** (step 0) to skip already-processed sources
+2. **Read** the source completely
 2. **Discuss** key takeaways with the user — what stood out, what's important
 3. **Create** a summary page in `wiki/sources/` with:
    - Full citation / attribution
